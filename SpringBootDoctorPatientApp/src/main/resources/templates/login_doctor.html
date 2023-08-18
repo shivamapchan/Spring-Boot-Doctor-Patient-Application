@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+	<title>Login page</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container-fluid text-center mt-4 border border-gray rounded p-3" style="max-width: 600px">	
+		<div class="text-center mt-4 font-weight-bold"><h>Select Your Account Type</h></div>
+			
+		<div class="container h-100">
+		    <div class="row align-items-center h-100 m-4">
+		        <div class="col-6 mx-auto">
+		            <div class="card h-100 border-gray justify-content-center">
+		                <div class="m-1 border border primary p-2" style="max-width: 250px">
+		                	<a href="/" th:href="@{/patient/patientLogin}">
+		                		<img th:src="@{/images/patientMedium.png}" class="center">
+		                	</a>
+							<p>Patient</p>
+						</div>
+		            </div>
+		        </div>
+		        <div class="col-6 mx-auto">
+		            <div class="card h-100 justify-content-center" style="border-color:green; border-width:2px;">
+		                <div class="m-1 border border primary p-2" style="max-width: 250px">
+		                	<a href="/" th:href="@{/doctor/doctorLogin}">
+		                		<img th:src="@{/images/doctorMedium.png}" class="center">
+		                	</a>	
+						<p>Doctor</p>
+					</div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<div class="mt-5">
+			<p>Hello Doctor!<br> Please enter your credentials to get started!</p>
+		</div>
+		
+		<form th:action="@{/login}" method="post" style="max-width: 500px; margin: 0 auto">
+			<div th:if="${param.error}">
+				<p class="text-danger">Invalid Email or Password!</p>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="alert alert-warning">You have been logged out successfully!</div>
+			</div>
+
+			<div class="p-3">
+				<p><input type="email" name="email" class="form-control mt-4" placeholder="E-mail" required /></p>
+				<p><input type="password" name="password" class="form-control" placeholder="Password" required /></p>
+				
+				
+				<div class="row container-fluid">
+					<p><input type="submit" value="  Login  " class="btn btn-primary mr-4" /></p>
+					<p class="mt-1">No Account ? <a href="/" th:href="@{/doctor/doctorForm}">Signup</a></p>
+				</div>				
+					
+			</div>
+		</form>	
+	</div>
+</body>
+</html>

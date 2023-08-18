@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('add-doctor-form')"></head>
+
+<body th:style="'background-image:url(' + @{/images/officeBuilding.jpg} + '); 
+	background-repeat: no-repeat, repeat; background-size: cover;'" class="img-fluid">
+
+	<div class="container-fluid mb-4">
+		<div class="container-fluid mt-2">
+			<div class="text-center"><h3>[[${pageTitle}]]</h3></div>
+
+			<form th:action="@{/doctor/addDoctor}" th:object="${doctor}" 
+			th:method="post" style="max-width: 650px; margin: 0 auto;"
+				onsubmit="return checkEmailUnique(this);">
+				<input type="hidden" th:field="*{d_id}">
+				
+				
+				<div class="border border-white rounded p-4" style="background-color: white;">
+					<div th:if="${param.success}">
+						<div class="alert alert-info">You have successfully registered the app!</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">First Name</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{first_name}" class="form-control" required th:minlength="3" maxlength="25">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Last Name</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{last_name}" class="form-control" required th:minlength="3" maxlength="25">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Email</label>
+						<div class="col-sm-8">
+							<input type="email" th:field="*{email}" class="form-control" required th:minlength="8" maxlength="25">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Password</label>
+						<div class="col-sm-8">
+							<input type="password" th:field="*{password}" class="form-control" required th:minlength="6" maxlength="16">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Photo</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{photo}" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Specialty</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{specialty}" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Phone</label>
+						<div class="col-sm-8">
+							<input type="number" th:field="*{phone}" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Street</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{street_address}" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">City</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{city}" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">State</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{state}" class="form-control" required>
+						</div>
+					</div>
+					<div class="justify-content-center row">
+						<button type="submit" class="btn btn-success m-2">Submit</button>
+						<p class="m-3" style="color: green">
+							Already have an account? <a href="/" th:href="@{/login}">Login</a>
+						<p>
+					</div>
+				</div>
+			</form>
+			<div class="modal fade text-center" id="modalDialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modalTitle">Warning</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<span id="modalBody"></span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#buttonCancel").on("click", function() {
+				window.location = "[[@{/index}]]"
+			})
+		});
+
+		function checkEmailUnique(form) {
+			url = "[[@{/doctor/check_email}]]";
+			doctorEmail = $("#email").val(); // jquery syntax
+			csrfValue = $("input[name='_csrf']").val();
+			params = {email : doctorEmail,_csrf : csrfValue };
+
+			$.post(url,params,function(response) {
+				if (response == "OK") {
+					form.submit();
+				} else if (response == "Duplicate") {
+					showModalDialog("Warning","Email "+ doctorEmail + " is already exist. Please try again with another email.");
+				} else { 
+					showModalDialog("Error","Unknown response from server");}
+
+				}).fail(function() {
+					showModalDialog("Error","Could not connect to the server");
+				});
+			return false;
+		}
+		function showModalDialog(title, message) {
+			$("#modalTitle").text(title);
+			$("#modalBody").text(message);
+			$("#modalDialog").modal();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('add-appointment-form')"></head>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="navigation :: menu"></div>
+		<div class="container-fluid mt-4" th:object="${doctor}">
+			<div class="text-center m-3" style="color: purple" th:object="${patient}">[[${message}]]			
+				
+			</div>
+		
+			<form th:action="@{/appointment/addAppointment}" th:method="post" th:object="${doctor}" style="max-width: 680px; margin:0 auto;">
+				
+				<div class="border border-gray rounded p-4" th:object="${appointment}">
+					
+					<div class="form-group row">
+						<div class="col-sm-8">
+							<input type="hidden" th:value="${patient.p_id}" name="map_patient" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-8">
+							<input type="hidden" th:value="${doctor.d_id}" name="map_doctor" class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Reason</label>
+						<div class="col-sm-8">
+							<input type="text" th:field="*{reason}" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Date</label>
+						<div class="col-sm-8">
+							<input type="date" th:field="*{date}" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Time</label>
+						<div class="col-sm-8">
+							<input type="time" th:field="*{time}" class="form-control" required>
+						</div>
+					</div>	
+					<div class="form-group row">
+						<div class="col-sm-8">
+							<input type="hidden" th:value="Pending.." name="status" class="form-control">
+						</div>
+					</div>				
+					<div class="text-center">
+						<button type="submit" class="btn btn-primary m-2">Apply</button>
+						<button type="button" class="btn btn-secondary m-2" onClick="cancelForm()">Cancel</button>
+					</div>
+				</div>		
+			</form>
+		</div>
+		
+	</div>
+	<script type="text/javascript">
+		function cancelForm(){
+			window.location="/doctor/view_doctor";
+		}
+	</script>
+</body>
+
+</html>

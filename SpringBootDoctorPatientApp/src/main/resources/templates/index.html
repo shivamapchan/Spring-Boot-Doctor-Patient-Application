@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('DoctorPatient-Homepage')"></head>
+
+<body style="background-color: light-gray">
+
+	<div class="container-fluid">
+		<div th:replace="navigation :: menu"></div>
+
+		<div class="contaier-fluid text-center mt-5 mb-5">
+			<p >
+				<img th:src="@{/images/doctors.jpg}" class="img-fluid">
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>
