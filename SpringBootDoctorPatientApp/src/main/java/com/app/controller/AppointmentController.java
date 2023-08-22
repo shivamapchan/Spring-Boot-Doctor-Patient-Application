@@ -63,14 +63,16 @@ public class AppointmentController {
 	}
 	
 	@GetMapping("acceptAppointment/{a_id}")
-	public String acceptAppointment(@PathVariable Long a_id) {
+	public String acceptAppointment(@PathVariable Long a_id,RedirectAttributes redirectAttributes) {
 		appointmentService.acceptAppointent(a_id);
+		redirectAttributes.addFlashAttribute("message", "Thanks, the confirmation message will be redirected to the patient.");
 		return "redirect:/doctor/upcomingAppointment";
 	}
 	
 	@GetMapping("declineAppointment/{a_id}")
-	public String declineAppointment(@PathVariable Long a_id) {
+	public String declineAppointment(@PathVariable Long a_id,RedirectAttributes redirectAttributes) {
 		appointmentService.declineAppointent(a_id);
+		redirectAttributes.addFlashAttribute("message", "Appointment Declined!, the message will be redirected to the patient.");
 		return "redirect:/doctor/upcomingAppointment";
 	}
 

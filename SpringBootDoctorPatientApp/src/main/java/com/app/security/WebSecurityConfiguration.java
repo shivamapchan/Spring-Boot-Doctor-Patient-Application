@@ -25,12 +25,14 @@ public class WebSecurityConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 
+
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
 		http.authorizeHttpRequests()
 				.antMatchers("/patient/check_email/**","/doctor/check_email/**").permitAll()
 				.antMatchers("/patient/patientForm", "/patient/addPatient").permitAll()
-				.antMatchers("/doctor/doctorForm", "/doctor/addDoctor").permitAll()
+				.antMatchers("/doctor/doctorForm", "/doctor/addDoctor","/images/doctorMedium.png/**").permitAll()
 				.antMatchers("/patient/patientLogin").permitAll()
 				.antMatchers("/doctor/doctorLogin").permitAll()
 				.anyRequest().authenticated()
