@@ -7,7 +7,7 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu"></div>
 		
-		<div class="container-fluid text-center mt-5" th:object="${doctor}">
+		<div class="container-fluid text-center mt-4" th:object="${doctor}">
 		
 			<div>
 				<div th:if="${message}" class="alert alert-success text-center">
@@ -51,10 +51,9 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th>Dr.Info</th>
+							<th>Dr. Info</th>
 							<th>Reason</th>
-							<th>Location</th>
-							<th>Status</th>
+							<th>Add/Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,8 +69,7 @@
 								[[${appointment?.map_doctor?.first_name}]], [[${appointment?.map_doctor?.last_name}]] ([[${appointment?.map_doctor?.specialty}]])
 							</td>
 							<td>[[${appointment.reason}]]</td>
-							<td>[[${appointment?.map_doctor?.city}]], [[${appointment?.map_doctor?.state}]]</td>
-							<td>[[${appointment.status}]]</td>
+							<td>[[${appointment?.map_doctor?.city}]], [[${appointment?.map_doctor?.state}]] <br>[[${appointment.status}]]</td>
 						</tr>
 					</tbody>
 				</table>

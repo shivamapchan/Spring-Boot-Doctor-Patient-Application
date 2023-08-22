@@ -56,15 +56,13 @@
 					<button type="button" class="btn btn-secondary m-2" onClick="backHomePage()"><- Back</button>
 				</div>
 			</div>
-			<div class="smallscreen-details mr-3">
+			<div class="smallscreen-details">
 				<table class="table table-striped table-hover">
 					<thead>
 					<tr>
-						<th>Patient</th>
+						<th>Name</th>
 						<th>Reason</th>
 						<th>Date</th>
-						<th>Time</th>
-						<th>Status</th>
 						<th>Action</th>
 					</tr>
 					</thead>
@@ -76,10 +74,9 @@
 												
 						<td>[[${appointment?.map_patient?.first_name}]], [[${appointment?.map_patient?.last_name}]]</td>
 												
-						<td th:text="${appointment.reason}"></td>
-						<td th:text="${appointment.date}"></td>
-						<td th:text="${appointment.time}"></td>
-						<td th:text="${appointment.status}"></td>
+						<td>[[${appointment.reason}]] [[${appointment.status}]]</td>
+						<td>[[${appointment.date}]]<br>(Time:[[${appointment.time}]])</td>
+						
 						<td>
 							<a th:href="@{/appointment/acceptAppointment/{a_id} (a_id=${appointment.a_id})}"
 							class="accept-appointment-link" th:firstName="${appointment?.map_patient?.first_name}"
