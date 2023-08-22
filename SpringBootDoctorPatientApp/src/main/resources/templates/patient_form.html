@@ -3,85 +3,96 @@
 
 <head th:replace="fragments :: page_head('add-patient-form')"></head>
 
-<body th:style="'background-image:url(' + @{/images/doctors.jpg} + '); 
+<body th:style="'background-image:url(' + @{/images/doctors2.jpg} + '); 
 background-repeat: no-repeat, repeat; background-size: cover;'" class="img-fluid">
 	<div class="container-fluid mb-4" >
 		<div class="container-fluid mt-2">
-			<div class="text-center"><h3>[[${pageTitle}]]</h3></div>
+			
 
 			<form th:action="@{/patient/addPatient}" th:object="${patient}"
-				th:method="post" style="max-width: 650px; margin: 0 auto;" 
+				th:method="post" style="max-width: 500px; margin:0 auto;" 
 				onsubmit="return checkEmailUnique(this);">
 				<input type="hidden" th:field="*{p_id}">
-
+				<div class="text-center ml-6"><h3>[[${pageTitle}]]</h3></div>
 				<div th:if="${param.success}">
 					<div class="alert alert-info">[[${message}]]</div>
 				</div>
-				<div class="border border-white rounded p-4" style="background-color: white;">
+				<div class="border border-white rounded p-4" style="background-color: white; margin-left:10px;">
 
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">First Name</label>
+						<label class="col-sm-4 col-form-label">First Name:</label>
 						<div class="col-sm-8">
 							<input type="text" th:field="*{first_name}" class="form-control"
-								required th:minlength="3" maxlength="25">
+								required th:minlength="3" maxlength="25" placeholder="First Name">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Last Name</label>
+						<label class="col-sm-4 col-form-label">Last Name:</label>
 						<div class="col-sm-8">
 							<input type="text" th:field="*{last_name}" class="form-control"
-								required th:minlength="3" maxlength="25">
+								required th:minlength="3" maxlength="25" placeholder="Last Name">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Email</label>
+						<label class="col-sm-4 col-form-label">Email:</label>
 						<div class="col-sm-8">
 							<input type="email" th:field="*{email}" class="form-control"
-								required th:minlength="8" maxlength="25">
+								required th:minlength="8" maxlength="25" placeholder="Email">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Password</label>
+						<label class="col-sm-4 col-form-label">Password:</label>
 						<div class="col-sm-8">
-							<input type="password" th:field="*{password}"
-								class="form-control" required th:minlength="6" maxlength="16">
+							<input type="password" th:field="*{password}" class="form-control" required 
+							th:minlength="6" maxlength="16" placeholder="Password">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Phone</label>
+						<label class="col-sm-4 col-form-label">Phone:</label>
 						<div class="col-sm-8">
-							<input type="number" th:field="*{phone}" class="form-control" required>
+							<input type="number" th:field="*{phone}" class="form-control" required placeholder="Phone">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Gender</label>
-						<div class="col-sm-8">
-							<input type="text" th:field="*{gender}" class="form-control">
+						<label class="col-sm-4 col-form-label">Gender:</label>
+						<div class="col-sm-8 mt-2">
+							<div class="custom-control custom-radio custom-control-inline">
+	                			<input type="radio" id="male" name="male" class="custom-control-input" value="male" th:field="*{gender}">
+	                			<label class="custom-control-label" for="male">male</label>
+            				</div>
+	            			<div class="custom-control custom-radio custom-control-inline">
+	                			<input type="radio" id="female" name="female" class="custom-control-input" value="female" th:field="*{gender}">
+	                			<label class="custom-control-label" for="female">female</label>
+	            			</div>
+	            			<div class="custom-control custom-radio custom-control-inline">
+	                			<input type="radio" id="other" name="other" class="custom-control-input" value="other" th:field="*{gender}">
+	                			<label class="custom-control-label" for="other">other</label>
+	            			</div>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Age</label>
+						<label class="col-sm-4 col-form-label">Age:</label>
 						<div class="col-sm-8">
 							<input type="number" th:field="*{age}" class="form-control" required
-							th:minlength="6" maxlength="16">
+							th:minlength="1" maxlength="3">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">Street</label>
+						<label class="col-sm-4 col-form-label">Address Line 1:</label>
 						<div class="col-sm-8">
-							<input type="text" th:field="*{street_address}" class="form-control">
+							<input type="text" th:field="*{street_address}" class="form-control" placeholder="Street Address">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">City</label>
+						<label class="col-sm-4 col-form-label">City:</label>
 						<div class="col-sm-8">
-							<input type="text" th:field="*{city}" class="form-control">
+							<input type="text" th:field="*{city}" class="form-control" placeholder="City">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-4 col-form-label">State</label>
+						<label class="col-sm-4 col-form-label">State:</label>
 						<div class="col-sm-8">
-							<input type="text" th:field="*{state}" class="form-control">
+							<input type="text" th:field="*{state}" class="form-control" placeholder="State">
 						</div>
 					</div>
 					<div class="justify-content-center row">

@@ -150,6 +150,11 @@ public class Doctor {
 	}
 	
 	
-	
+	@Transient
+	public String getPhotosImagePath() {
+		if(d_id == null || photo == null) 
+			return "/images/doctorMedium.png";
+		return "/doctor-photos/" + this.d_id + "/"+ this.photo;
+	}
 	
 }

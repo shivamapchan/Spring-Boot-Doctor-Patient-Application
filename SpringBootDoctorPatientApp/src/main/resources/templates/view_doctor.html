@@ -7,38 +7,80 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu"></div>
 		
-		<div class="container-fluid text-center mt-5" th:object="${doctor}">
-		<div th:field="*{d_id}"></div>
-			<div>
-				<h3>[[${pageTitle}]]</h3>
-				
-				<div th:if="${message}" class="alert alert-success text-center">
-					[[${message}]]
-				</div>
+		<div class="container-fluid text-center mt-3" th:object="${doctor}">
+			<div th:field="*{d_id}"></div>
+			<div class="mt-2">
+				<form th:action="@{/doctor/view_doctor}" class="form-inline container-fluid text-center">
+					<input type="search" name="keyword" class="form-control m-2" required 
+					placeholder="Search Doctors">
+					<input type="submit" value="Search" class="btn btn-primary m-2">
+				</form>
 			</div>
+				
+			<div th:if="${message}" class="alert alert-success text-center">[[${message}]]</div>
 			<div class="mediumscreen-details">
 				<table class="table table-striped table-bordered table-hover">
 					<thead class="thead-light">
 						<tr>
-							
 							<th>Dr. Name</th>
-							<th>Photo</th>
+							<th>Photos</th>
 							<th>Specialties</th>
 							<th>Phone</th>
 							<th>Location</th>
-							<th>Apply Appointment</th>
-							
+							<th>Apply Appointment</th>	
 						</tr>
 					</thead>
 					<tbody>
+						<tr th:if="${doctorList.isEmpty()}" style="color: purple">
+							<td colspan="8">< No Doctor found with that search keyword. Try again!></td>
+						</tr>
+												
 						<th:block th:each="doctor: ${doctorList}">
+						
 						<tr>
-							
 							<td>[[${doctor.first_name}]], [[${doctor.last_name}]]</td>
-							<td>[[${doctor.photo}]]</td>
+							<td>
+								<!-- <span th:if="${doctor.photo == null}" class="fas fa-portrait fa-3x icon-silver"></span> -->
+								<span th:if="${doctor.photo == null}"><img th:src="@{/images/doctorMedium.png}" class="center"></span>
+								<img th:if="${doctor.photo != null }" th:src="@{${doctor.getPhotosImagePath()}}"
+								style="width: 100px">
+							</td>
 							<td>[[${doctor.specialty}]]</td>
 							<td>[[${doctor.phone}]]</td>
 							<td>[[${doctor.city}]],[[${doctor.state}]]</td>
+							<td><a th:href="@{/appointment/appointmentForm/{doc_id} (doc_id=${doctor.d_id})}">apply</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="smallscreen-details mr-1">
+				<table class="table table-striped table-bordered table-hover">
+					<thead class="thead-light">
+						<tr>
+							<th>Dr.Profile</th>
+							<th>Location</th>
+							<th>Apply Appointment</th>	
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${doctorList.isEmpty()}" style="color: purple">
+							<td colspan="8">< No Doctor found with that search keyword. Try again!></td>
+						</tr>
+												
+						<th:block th:each="doctor: ${doctorList}">
+						
+						<tr>
+							<td>
+								<!-- <span th:if="${doctor.photo == null}" class="fas fa-portrait fa-3x icon-silver"></span> -->
+								<span th:if="${doctor.photo == null}"><img th:src="@{/images/doctorMedium.png}" class="center"></span>
+								<img th:if="${doctor.photo != null }" th:src="@{${doctor.getPhotosImagePath()}}"
+								style="width: 100px">
+								<br>[[${doctor.first_name}]], [[${doctor.last_name}]] ([[${doctor.specialty}]])
+							</td>
+							
+							<td>[[${doctor.city}]],[[${doctor.state}]] <br> ph# [[${doctor.phone}]]
+							</td>
 							<td><a th:href="@{/appointment/appointmentForm/{doc_id} (doc_id=${doctor.d_id})}">apply</a></td>
 							
 						</tr>

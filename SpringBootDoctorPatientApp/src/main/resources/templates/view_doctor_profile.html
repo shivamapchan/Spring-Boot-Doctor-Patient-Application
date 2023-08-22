@@ -14,56 +14,48 @@
 				th:object="${doctorObject}">
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label"><b>Doctor ID: </b></label>
-					<div class="col-sm-8">
-						<input type="number" th:field="*{d_id}" class="form-control" th:readonly="readonly">
+					<div class="col-sm-8 mt-2">
+						[[${doctorObject.d_id}]]
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 col-form-label"><b>First Name</b></label>
+					<label class="col-sm-4 col-form-label"></label>
 					<div class="col-sm-8">
-						<input type="text" th:field="*{first_name}" class="form-control" th:readonly="readonly">
+						<span th:if="${doctorObject.photo == null}"><img th:src="@{/images/doctorMedium.png}" class="center"></span>
+						<img th:if="${doctorObject.photo != null }" th:src="@{${doctorObject.getPhotosImagePath()}}" style="width: 150px">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 col-form-label"><b>Last Name</b></label>
+					<label class="col-sm-4 col-form-label"></label>
 					<div class="col-sm-8">
-						<input type="text" th:field="*{last_name}" class="form-control" th:readonly="readonly">
+						[[${doctorObject.first_name}]] [[${doctorObject.last_name}]]
 					</div>
 				</div>
+				
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label"><b>Email</b></label>
-					<div class="col-sm-8">
-						<input type="email" th:field="*{email}" class="form-control" th:readonly="readonly">
+					<div class="col-sm-8 mt-2">
+						[[${doctorObject.email}]]
+						<!-- <input type="email" th:field="*{email}" class="form-control" th:readonly="readonly"> -->
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label"><b>Phone Number</b></label>
-					<div class="col-sm-8">
-						<input type="number" th:field="*{phone}" class="form-control" th:readonly="readonly">
-					</div>
+					<div class="col-sm-8 mt-2">
+						[[${doctorObject.phone}]]
+ 						<!-- <input type="number" th:field="*{phone}" class="form-control" th:readonly="readonly"> -->					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label"><b>Specialty</b></label>
-					<div class="col-sm-8">
-						<input type="text" th:field="*{specialty}" class="form-control" th:readonly="readonly">
+					<div class="col-sm-8 mt-2">
+						[[${doctorObject.specialty}]]
+						<!-- <input type="text" th:field="*{specialty}" class="form-control" th:readonly="readonly"> -->
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 col-form-label"><b>Street</b></label>
-					<div class="col-sm-8">
-						<input type="text" th:field="*{street_address}" class="form-control" th:readonly="readonly">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-sm-4 col-form-label"><b>City</b></label>
-					<div class="col-sm-8">
-						<input type="text" th:field="*{city}" class="form-control" th:readonly="readonly">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-sm-4 col-form-label"><b>State</b></label>
-					<div class="col-sm-8">
-						<input type="text" th:field="*{state}" class="form-control" th:readonly="readonly">
+					<label class="col-sm-4 col-form-label"><b>Address</b></label>
+					<div class="col-sm-8 mt-2">
+						[[${doctorObject.street_address}]], [[${doctorObject.city}]], [[${doctorObject.state}]]
 					</div>
 				</div>
 				<div class="text-center">

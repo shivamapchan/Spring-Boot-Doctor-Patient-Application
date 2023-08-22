@@ -26,11 +26,16 @@ public class DoctorDetails implements UserDetails {
 	public String getPassword() {
 		return this.doctor.getPassword();
 	}
-
+	
 	@Override
 	public String getUsername() {
 		return this.doctor.getEmail();
 	}
+	
+	public String getPhoto() {
+		return this.doctor.getPhoto();
+	}
+
 
 	@Override
 	public boolean isAccountNonExpired() {

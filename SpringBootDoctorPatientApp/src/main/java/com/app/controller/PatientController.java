@@ -54,7 +54,6 @@ public class PatientController {
 			String email = loggedInPatient.getUsername();
 			Patient patient = patientService.findPatientByEmail(email);
 			model.addAttribute("patient", patient);
-			model.addAttribute("pageTitle","Updating Patient "+ patient.getFirst_name()+ ", "+patient.getLast_name());
 			return "patient_update_form";
 		}catch(PatientNotFoundException e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
@@ -86,7 +85,6 @@ public class PatientController {
 		List<Appointment> appointments = appointmentService.getAppointmentsByPatientId(patient.getP_id());
 
 		model.addAttribute("appointmentList",appointments);
-		model.addAttribute("pageTitle", "Doctor appointment list");
 		return "view_doctor_appointment_list";
 	}
 }

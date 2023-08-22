@@ -22,7 +22,7 @@ public class DoctorService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public void insertDoctor(Doctor doctor) {
+	public Doctor insertDoctor(Doctor doctor) {
 		
 		boolean isUpdatingDoctor = (doctor.getD_id() != null);
 		if(isUpdatingDoctor) {
@@ -38,7 +38,7 @@ public class DoctorService {
 			doctor.setRole(UserRole.DOCTOR);
 		}
 		
-		doctorRepository.save(doctor);
+		return doctorRepository.save(doctor);
 	}
 	
 	private void encodePassword(Doctor doctor) {
@@ -46,7 +46,11 @@ public class DoctorService {
 		doctor.setPassword(encodedPassword);
 	}
 	
-	public List<Doctor> findAllDoctor(){
+	public List<Doctor> findAllDoctor(String keyword){
+		if(keyword != null) {
+			List<Doctor> docotrList = doctorRepository.getFilterDoctor(keyword);
+			return docotrList;
+		}
 		List<Doctor> doctorList = doctorRepository.findAll();
 		return doctorList;
 	}

@@ -7,9 +7,7 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu"></div>
 
-		<div>
-			<h4 class="pt-4 text-center">[[${pageTitle}]]</h4>
-
+		<div class="mt-4">
 			<div class="border border-gray rounded p-4" style="max-width: 680px; margin:0 auto;"
 				th:object="${patient}">
 				<div class="form-group row">

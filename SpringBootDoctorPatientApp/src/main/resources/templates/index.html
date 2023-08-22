@@ -7,8 +7,15 @@
 
 	<div class="container-fluid">
 		<div th:replace="navigation :: menu"></div>
-
-		<div class="contaier-fluid text-center mt-5 mb-5">
+		
+		<div class="mt-2">
+			<form th:action="@{/doctor/view_doctor}" class="form-inline container-fluid text-center">
+				<input type="search" name="keyword" class="form-control m-2" required 
+				placeholder="Search Doctors">
+				<input type="submit" value="Search" class="btn btn-primary m-2">
+			</form>
+		</div>
+		<div class="contaier-fluid text-center mt-2 mb-5">
 			<p >
 				<img th:src="@{/images/doctors.jpg}" class="img-fluid">
 			</p>
