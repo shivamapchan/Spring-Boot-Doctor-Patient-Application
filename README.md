@@ -1,5 +1,5 @@
 # Spring-Boot-Doctor-Patient-Application
-# Url
+# URL
 http://doctorpatient-env.eba-izsqecu8.us-east-1.elasticbeanstalk.com/login
 
 Doctor-patient application model with Spring Boot, Spring Security, Hibernate, Thymeleaf, and MySQL. 
